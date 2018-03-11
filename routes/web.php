@@ -11,6 +11,12 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::group(['namespace' => 'Site'], function (){
+    Route::get('/', 'SiteController@index');
+    Route::get('/home', 'SiteController@index')->name('home');
 });
+
+Auth::routes();
+
+

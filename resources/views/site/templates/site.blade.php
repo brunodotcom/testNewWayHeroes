@@ -34,46 +34,40 @@
                     <span class="navbar-toggler-bar"></span>
                     <span class="navbar-toggler-bar"></span>
                 </button>
-                <a class="navbar-brand" href="https://www.creative-tim.com">New Way Heroes</a>
+                <a class="navbar-brand" href="home">New Way Heroes</a>
             </div>
             <div class="collapse navbar-collapse" id="navbarToggler">
-                <ul class="navbar-nav ml-auto">
+                <ul class="navbar-nav ml-auto">                    
                     <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="Follow us on Twitter" data-placement="bottom" href="https://twitter.com/CreativeTim" target="_blank">
-                            <i class="fa fa-twitter"></i>
-                            <p class="d-lg-none">Twitter</p>
-                        </a>
+                        <a href="register" target="_blank" class="nav-link"><i class="nc-icon nc-single-02"></i> Register</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="Like us on Facebook" data-placement="bottom" href="https://www.facebook.com/CreativeTim" target="_blank">
-                            <i class="fa fa-facebook-square"></i>
-                            <p class="d-lg-none">Facebook</p>
-                        </a>
+                        <a href="login" target="_blank" class="btn btn-danger btn-round"><i class="nc-icon nc-key-25"></i> Login</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="Follow us on Instagram" data-placement="bottom" href="https://www.instagram.com/CreativeTimOfficial" target="_blank">
-                            <i class="fa fa-instagram"></i>
-                            <p class="d-lg-none">Instagram</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" rel="tooltip" title="Star on GitHub" data-placement="bottom" href="https://www.github.com/CreativeTimOfficial/paper-kit" target="_blank">
-                            <i class="fa fa-github"></i>
-                            <p class="d-lg-none">GitHub</p>
-                        </a>
-                    </li>
-                    <li class="nav-item">
-                        <a href="documentation/tutorial-components.html" target="_blank" class="nav-link"><i class="nc-icon nc-book-bookmark"></i> Documentation</a>
-                    </li>
-                    <li class="nav-item">
-                                                <a href="https://www.creative-tim.com/product/paper-kit-2-pro?ref=pk2-free-local" target="_blank" class="btn btn-danger btn-round">Upgrade to Pro</a>
-                                        </li>
                 </ul>
             </div>
         </div>
     </nav>
     <div class="wrapper">
         @yield('content')        
+    <footer class="footer">
+       <div class="container">
+           <div class="row">
+               <nav class="footer-nav">
+                   <ul>
+                       <li><a href="http://www.creative-tim.com">Creative Tim</a></li>
+                       <li><a href="http://blog.creative-tim.com">Blog</a></li>
+                       <li><a href="http://www.creative-tim.com/license">Licenses</a></li>
+                   </ul>
+               </nav>
+               <div class="credits ml-auto">
+                   <span class="copyright">
+                       © <script>document.write(new Date().getFullYear())</script>, project for New Way developed by Bruno Rocha(@brunodotcom), template made with <i class="fa fa-heart heart"></i> by Creative Tim
+                   </span>
+               </div>
+           </div>
+       </div>
+   </footer>
 </body>
 
 <!-- Core JS Files -->
