@@ -21,7 +21,7 @@ class CreateHeroesTable extends Migration
             $table->integer('lifePoints');
             $table->integer('defensePoints');
             $table->integer('damagePoints');
-            $table->integer('attackSpeed');
+            $table->decimal('attackSpeed', 5, 2);
             $table->integer('movementSpeed');
             $table->integer('idUserInsert')->nullable();
             $table->integer('idUserUpdate')->nullable();            

@@ -23,3 +23,8 @@ Route::get('logout', [
   'as' => 'logout',
   'uses' => 'Auth\LoginController@logout'
 ])->name('logout');
+
+
+Route::group(['middleware' => ['web','auth'], 'namespace' => 'Panel'], function(){
+    Route::resource('heroes', 'HeroesController');
+});
