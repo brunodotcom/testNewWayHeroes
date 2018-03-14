@@ -9,15 +9,15 @@
                             <div class="title-brand">
                                     <h1 class="presentation-title">New Way Heroes</h1>
                                     <div class="fog-low">
-                                            <img src="{{ asset('img/fog-low.png') }}" alt="">
+                                        <img src="{{ asset('img/fog-low.png') }}" alt="">
                                     </div>
                                     <div class="fog-low right">
-                                            <img src="{{ asset('img/fog-low.png') }}" alt="">
+                                        <img src="{{ asset('img/fog-low.png') }}" alt="">
                                     </div>
                             </div>
 
                             <h2 class="presentation-subtitle text-center">
-                               Teste
+                               A story from the mightest heroes of Fruit Basket(Bauru) land...
                             </h2>
                         </div>
                 </div>

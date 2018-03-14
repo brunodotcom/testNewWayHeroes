@@ -19,4 +19,7 @@ Route::group(['namespace' => 'Site'], function (){
 
 Auth::routes();
 
-
+Route::get('logout', [
+  'as' => 'logout',
+  'uses' => 'Auth\LoginController@logout'
+])->name('logout');

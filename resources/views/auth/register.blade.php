@@ -8,7 +8,7 @@
                     <div class="row">
                         <div class="col-lg-4 ml-auto mr-auto">
                             <div class="card card-register">
-                                <h3 class="title">Welcome</h3>
+                                <h3 class="title">Sign up to our quest!</h3>
 								
                                 <form class="register-form" role="form" method="POST" action="{{ url('/register') }}">
                                     {{ csrf_field() }}
@@ -48,9 +48,7 @@
                             </div>
                         </div>
                     </div>
-					<div class="footer register-footer text-center">
-						<h6>&copy; <script>document.write(new Date().getFullYear())</script>, made with <i class="fa fa-heart heart"></i> by Creative Tim</h6>
-					</div>
+			
                 </div>
         </div>
     </div>
