@@ -2553,7 +2553,7 @@ textarea.form-control {
 
 .card-register {
   // background-color: #FF8F5E;
-  background-color : #b7b7b7;
+  background-color : #2b2424;
   border-radius: 8px;
   color: #fff;
   max-width: 350px;
@@ -2575,7 +2575,7 @@ textarea.form-control {
 }
 
 .card-register .title {
-  color: #4c4b4b;
+  color: #fff;
   text-align: center;
 }
 

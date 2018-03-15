@@ -14,24 +14,22 @@
                                 <form class="register-form" role="form" method="POST" action="{{ url('/login') }}">
                                     {{ csrf_field() }}
                                     
-                                   
-                                    <label>Email</label>
-                                    <input type="text" class="form-control" placeholder="Email" id="email" name="email" value="{{ old('email') }}" required>
-                                    @if ($errors->has('email'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('email') }}</strong>
-                                        </span>
-                                    @endif
+                                    <div class="form-group">
+                                        <label>Email</label>
+                                        <input type="text" class="form-control" placeholder="Email" id="email" name="email" value="{{ old('email') }}" required>
+                                        @if ($errors->has('email'))
+                                            <div class="form-control-feedback">{{ $errors->first('email') }}</div>                                        
+                                        @endif
+                                    </div>
 
                                     
-                                    
-                                    <label>Password</label>
-                                    <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
-                                    @if ($errors->has('password'))
-                                        <span class="help-block">
-                                            <strong>{{ $errors->first('password') }}</strong>
-                                        </span>
-                                    @endif                                    
+                                    <div class="form-group">
+                                        <label>Password</label>
+                                        <input type="password" class="form-control" placeholder="Password" id="password" name="password" required>
+                                        @if ($errors->has('password'))
+                                            <div class="form-control-feedback">{{ $errors->first('password') }}</div>                                        
+                                        @endif                                    
+                                    </div>
                                     
                                     <button class="btn btn-danger btn-block btn-round">Login</button>
                                 </form>                                

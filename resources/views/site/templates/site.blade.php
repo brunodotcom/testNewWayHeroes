@@ -40,7 +40,7 @@
             @if (Route::has('login'))
                 <div class="collapse navbar-collapse" id="navbarToggler">
                     <ul class="navbar-nav ml-auto">                    
-                        @if (Auth::check())                            
+                        @if (Auth::check())
                             <li class="nav-item">
                                 <a href="heroes" class="nav-link"><i class="nc-icon nc-circle-10"></i> Heroes</a>
                             </li>
@@ -108,4 +108,8 @@
 <!--  Paper Kit Initialization and functons -->
 <script src="{{ asset('js/paper-kit.js?v=2.1.0') }}"></script>
 
+<!-- Plugins -->
+<script src="{{ asset('js/jquery.mask.js') }}" type="text/javascript"></script>
+
+@stack('scripts')
 </html>

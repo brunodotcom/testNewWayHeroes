@@ -6,6 +6,7 @@ use App\Models\Heroes;
 use App\Models\Classes;
 use App\Models\Specialities;
 use App\Models\HeroesPhotos;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 
@@ -19,15 +20,7 @@ class HeroesController extends Controller
      */
     public function index()
     {
-        $searchKey = \Request::get('searchKey');
-
-        if(!$searchKey){
-            $heroes = Heroes::all();
-        }
-        else{
-            $heroes = Heroes::where('name','like','%'.trim($searchKey).'%')->get();            
-                            
-        }        
+        $heroes = Heroes::orderBy('name')->simplePaginate(5);
         return view('site.panel.heroes.index',['allrows' => $heroes]);
     }
 
@@ -73,7 +66,8 @@ class HeroesController extends Controller
         $hero->attackSpeed = $request->attackSpeed;
         $hero->movementSpeed = $request->movementSpeed;
         $hero->description = $request->description;             
-
+        
+        $hero->idUserInsert = Auth::id();
         
         if($hero->save()){
         
@@ -172,8 +166,9 @@ class HeroesController extends Controller
         $hero->damagePoints = $request->damagePoints;
         $hero->attackSpeed = $request->attackSpeed;
         $hero->movementSpeed = $request->movementSpeed;
-        $hero->description = $request->description;             
-
+        $hero->description = $request->description;                     
+        
+        $hero->idUserUpdate = Auth::id();
         
         if($hero->save()){
         
@@ -182,7 +177,7 @@ class HeroesController extends Controller
                 $files = $request->file('photos');
 
                 foreach ($files as $file) {
-                    $file->store('heroes/' . $hero->idHero . '/photos');
+                    $file->store('public/heroes/' . $hero->idHero . '/photos');
                     
                     $heroPhoto = new HeroesPhotos;
                     $heroPhoto->fileName = $file->hashName();
