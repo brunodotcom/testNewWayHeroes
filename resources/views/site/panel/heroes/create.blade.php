@@ -8,18 +8,20 @@
 	    {{ ($errors->has('name')) ? $errors->first('name') : '' }}
             
             <h3>Class</h3>
-            <select class="form-control" name="idClass" c>
-	    @foreach($classes as $class)
-	    	<option value="{{ $class->idClass }}"> {{ $class -> name }} </option>
-            @endforeach
+            <select class="form-control" name="idClass">
+                <option>Class</option>                
+                @foreach($classes as $class)
+                    <option value="{{ $class->idClass }}"> {{ $class -> name }} </option>
+                @endforeach
             </select>
             {{ ($errors->has('idClass')) ? $errors->first('idClass') : '' }}
             
             <h3>Speciality</h3>
-            <select class="form-control" name="idSpeciality" c>
-	    @foreach($specialities as $speciality)
-	    	<option value="{{ $speciality->idSpeciality }}"> {{ $speciality -> name }} </option>
-            @endforeach
+            <select class="form-control" name="idSpeciality">                
+                <option>Speciality</option>
+                @foreach($specialities as $speciality)
+                    <option value="{{ $speciality->idSpeciality }}"> {{ $speciality -> name }} </option>
+                @endforeach                
             </select>
             {{ ($errors->has('idSpeciality')) ? $errors->first('idSpeciality') : '' }}
             
@@ -48,6 +50,8 @@
             <textarea class="form-control" rows="4" placeholder="Description" name="description"></textarea>
             {{ ($errors->has('description')) ? $errors->first('description') : '' }}
             
+            <h3>Photos</h3>
+            <input class="form-control" type="file" name="photos[]" multiple>
             
 	    
             <br>	    

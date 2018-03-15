@@ -38,8 +38,8 @@ class HeroesController extends Controller
      */
     public function create()
     {
-        $classes = Classes::all();
-        $specialities = Specialities::all();
+        $classes = Classes::orderBy('name')->get();
+        $specialities = Specialities::orderBy('name')->get();
         
         return view('site.panel.heroes.create', ['classes' => $classes,'specialities'=>$specialities]);
     }
@@ -64,16 +64,35 @@ class HeroesController extends Controller
                 ]);
 
         $hero = new Heroes;
-        $hero->name= $request->name;
-        $hero->idClass= $request->name;
-        $hero->idSpeciality= $request->name;
-        $hero->lifePoints= $request->name;
-        $hero->defensePoints= $request->name;
-        $hero->damagePoints= $request->name;
+        $hero->name = $request->name;
+        $hero->idClass = $request->idClass;
+        $hero->idSpeciality = $request->idSpeciality;
+        $hero->lifePoints = $request->lifePoints;
+        $hero->defensePoints = $request->defensePoints;
+        $hero->damagePoints = $request->damagePoints;
+        $hero->attackSpeed = $request->attackSpeed;
+        $hero->movementSpeed = $request->movementSpeed;
+        $hero->description = $request->description;             
 
-        $hero->save();
+        
+        if($hero->save()){
+        
+            if($request->hasFile('photos'))
+            {
+                $files = $request->file('photos');
 
-        return redirect('jedi')->with('message', 'Jedi incluído com sucesso!');
+                foreach ($files as $file) {
+                    $file->store('heroes/' . $hero->idHero . '/photos');
+                    
+                    $heroPhoto = new HeroesPhotos;
+                    $heroPhoto->fileName = $file->hashName();
+                    $heroPhoto->idHero = $hero->idHero;
+                    $heroPhoto->save();
+                }
+            }
+        }
+
+        return redirect('heroes')->with('message', 'Hero added to party!');
     }
 
     /**
@@ -82,9 +101,26 @@ class HeroesController extends Controller
      * @param  \App\Heroes  $heroes
      * @return \Illuminate\Http\Response
      */
-    public function show(Heroes $heroes)
+    public function show($id)
     {
-        //
+        
+        $hero = Heroes::find($id); 
+        
+        if(!$hero){
+        	abort(404);
+        }
+        
+        $class = Classes::find($hero->idClass);
+        $speciality = Specialities::find($hero->idSpeciality);
+        $photos = HeroesPhotos::where('idHero',$hero->idHero)->get();
+        
+        $hero->className = $class->name;
+        $hero->specialityName = $speciality->name;
+        $hero->photos = $photos;
+        
+        
+        return view('site.panel.heroes.details')->with('detailpage', $hero);
+     
     }
 
     /**
@@ -93,9 +129,18 @@ class HeroesController extends Controller
      * @param  \App\Heroes  $heroes
      * @return \Illuminate\Http\Response
      */
-    public function edit(Heroes $heroes)
+    public function edit($id)
     {
-        //
+        
+        $hero = Heroes::find($id);
+        if(!$hero){
+            abort(404);
+        }
+        
+        $classes = Classes::orderBy('name')->get();
+        $specialities = Specialities::orderBy('name')->get();
+        
+        return view('site.panel.heroes.edit', ['classes' => $classes,'specialities'=>$specialities])->with('hero', $hero);
     }
 
     /**
@@ -105,9 +150,49 @@ class HeroesController extends Controller
      * @param  \App\Heroes  $heroes
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Heroes $heroes)
+    public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+                'name' => 'required'
+                ,'idClass' => 'required'
+                ,'idSpeciality' => 'required'
+                ,'lifePoints' => 'required'
+                ,'defensePoints' => 'required'
+                ,'damagePoints' => 'required'
+                ,'attackSpeed' => 'required'
+                ,'movementSpeed' => 'required'
+                ]);
+
+        $hero = Heroes::find($id);
+        $hero->name = $request->name;
+        $hero->idClass = $request->idClass;
+        $hero->idSpeciality = $request->idSpeciality;
+        $hero->lifePoints = $request->lifePoints;
+        $hero->defensePoints = $request->defensePoints;
+        $hero->damagePoints = $request->damagePoints;
+        $hero->attackSpeed = $request->attackSpeed;
+        $hero->movementSpeed = $request->movementSpeed;
+        $hero->description = $request->description;             
+
+        
+        if($hero->save()){
+        
+            if($request->hasFile('photos'))
+            {
+                $files = $request->file('photos');
+
+                foreach ($files as $file) {
+                    $file->store('heroes/' . $hero->idHero . '/photos');
+                    
+                    $heroPhoto = new HeroesPhotos;
+                    $heroPhoto->fileName = $file->hashName();
+                    $heroPhoto->idHero = $hero->idHero;
+                    $heroPhoto->save();
+                }
+            }
+        }
+        
+        return redirect('heroes')->with('message', 'Hero skils updated!');
     }
 
     /**
@@ -116,8 +201,10 @@ class HeroesController extends Controller
      * @param  \App\Heroes  $heroes
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Heroes $heroes)
+    public function destroy($id)
     {
-        //
+        $hero = Heroes::find($id);
+        $hero->delete();
+        return redirect('heroes')->with('message', 'Hero '.$hero->name.' deleted!');
     }
 }

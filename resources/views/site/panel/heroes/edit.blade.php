@@ -1,54 +1,62 @@
-@extends('site.panel.jedi.master')
+@extends('site.panel.heroes.master')
 
-@section('left-sidebar')
-        <h1>Editar Jedi</h1>
-	<form action="/jedi/{{ $jedi->id }}" method="POST" enctype="multipart/form-data">
-            <h3>Nome</h3>
-            <input type="text" name="nome" value="{{ $jedi->nome }}" placeholder="Nome" maxlength="150" style="width: 100%">
-	    {{ ($errors->has('nome')) ? $errors->first('nome') : '' }}
-            <br>
-            <h3>Data de Nascimento</h3>
-            <input type="text" name="nascimento" value="{{ $jedi->nascimento }}" placeholder="Data de Nascimento" maxlength="10">
-	    {{ ($errors->has('nascimento')) ? $errors->first('nascimento') : '' }}
-            <br>
-            <h3>Espécie</h3>
-            <select name="especie">
-	    @foreach($especies as $especie)
-	    	<option value="{{ $especie->id }}" {{ $especie->id === $jedi->especie ? "selected" : "" }}> {{ $especie -> name }} </option>
-            @endforeach
-            </select>
-            {{ ($errors->has('especie')) ? $errors->first('especie') : '' }}
-            <br>
-	    <h3>Gênero</h3>
-            <input type="radio" name="genero" value="M" {{ $jedi->genero === "M" ? "checked" : "" }} >&nbsp;Masculino&nbsp;</input>
-            <input type="radio" name="genero" value="F" {{ $jedi->genero === "F" ? "checked" : "" }}>&nbsp;Feminino&nbsp;</input>
-            <input type="radio" name="genero" value="O" {{ $jedi->genero === "O" ? "checked" : "" }}>&nbsp;Outros&nbsp;</input>
-            {{ ($errors->has('genero')) ? $errors->first('genero') : '' }}
-            <br>
-            <h3>Altura</h3>
-            <input type="text" name="altura" value="{{ $jedi->altura }}" placeholder="Altura" maxlength="4">
-	    {{ ($errors->has('altura')) ? $errors->first('altura') : '' }}
-            <br>
-	    <h3>Foto</h3>
-            <img src="/images/{{ $jedi->foto }}">
-            <br>
-            <br>
-	    {{ csrf_field() }}
+@section('panel-content')
+	<h2>Edit hero</h2>
+	<form class="" action="/heroes/{{ $hero->idHero }}" method="POST" enctype="multipart/form-data">
+            <h3>Name</h3>
+            <input class="form-control" type="text" name="name" value="{{ $hero->name }}" placeholder="Name" maxlength="150">
+	    {{ ($errors->has('name')) ? $errors->first('name') : '' }}
             
-	    <input type="file" name="foto" placeholder="Foto">	              
-	    {{ ($errors->has('foto')) ? $errors->first('foto') : '' }}
-            <br>            
-	    <h3>Status</h3>
-            <input type="radio" name="status" value="V" {{ $jedi->status === "V" ? "checked" : "" }}>&nbsp;Vivo&nbsp;</input>
-            <input type="radio" name="status" value="M" {{ $jedi->status === "M" ? "checked" : "" }}>&nbsp;Morto&nbsp;</input>
-            <input type="radio" name="status" value="A" {{ $jedi->status === "A" ? "checked" : "" }}>&nbsp;Aposentado&nbsp;</input>
-            <input type="radio" name="status" value="E" {{ $jedi->status === "E" ? "checked" : "" }}>&nbsp;Exilado&nbsp;</input>
-            <input type="radio" name="status" value="D" {{ $jedi->status === "D" ? "checked" : "" }}>&nbsp;Corrompido pelo Lado Negro da Força&nbsp;</input>            
-            <br>            
-            {{ ($errors->has('status')) ? $errors->first('status') : '' }}
+            <h3>Class</h3>
+            <select class="form-control" name="idClass">
+                <option>Class</option>                
+                @foreach($classes as $class)
+                    <option value="{{ $class->idClass }}" {{ $class->idClass === $hero->idClass ? "selected" : "" }}> {{ $class -> name }} </option>
+                @endforeach
+            </select>
+            {{ ($errors->has('idClass')) ? $errors->first('idClass') : '' }}
+            
+            <h3>Speciality</h3>
+            <select class="form-control" name="idSpeciality">                
+                <option>Speciality</option>
+                @foreach($specialities as $speciality)
+                    <option value="{{ $speciality->idSpeciality }}" {{ $speciality->idSpeciality === $hero->idSpeciality ? "selected" : "" }}> {{ $speciality -> name }} </option>
+                @endforeach                
+            </select>
+            {{ ($errors->has('idSpeciality')) ? $errors->first('idSpeciality') : '' }}
+            
+            
+            <h3>Life Points</h3>
+            <input class="form-control" type="text" name="lifePoints" value="{{ $hero->lifePoints }}" placeholder="Life Points" maxlength="5">
+	    {{ ($errors->has('lifePoints')) ? $errors->first('lifePoints') : '' }}
+            
+            <h3>Defense Points</h3>
+            <input class="form-control" type="text" name="defensePoints" value="{{ $hero->defensePoints }}" placeholder="Defense Points" maxlength="5">
+	    {{ ($errors->has('defensePoints')) ? $errors->first('defensePoints') : '' }}
+            
+            <h3>Damage Points</h3>
+            <input class="form-control" type="text" name="damagePoints" value="{{ $hero->damagePoints }}" placeholder="Damage Points" maxlength="5">
+	    {{ ($errors->has('damagePoints')) ? $errors->first('damagePoints') : '' }}
+            
+            <h3>Attack Speed</h3>
+            <input class="form-control" type="text" name="attackSpeed" value="{{ $hero->attackSpeed }}" placeholder="Attack Speed" maxlength="5">
+	    {{ ($errors->has('attackSpeed')) ? $errors->first('attackSpeed') : '' }}
+            
+            <h3>Movement Speed</h3>
+            <input class="form-control" type="text" name="movementSpeed" value="{{ $hero->movementSpeed }}" placeholder="Movement Speed" maxlength="5">
+	    {{ ($errors->has('movementSpeed')) ? $errors->first('movementSpeed') : '' }}
+            
+            <h3>Description</h3>
+            <textarea class="form-control" rows="4" placeholder="Description" name="description">{{ $hero->description }}</textarea>
+            {{ ($errors->has('description')) ? $errors->first('description') : '' }}
+            
+            <h3>Photos</h3>
+            <input class="form-control" type="file" name="photos[]" multiple>
+            
+	    
             <br>	    
 	    <input type="hidden" name="_method" value="put">
 	    <input type="hidden" name="_token" value="{{ csrf_token() }}">
-	    <input type="submit" name="name" value="Salvar">
+	    <input class="btn btn-default" type="submit" name="add" value="Update">
 	</form>
 @endsection

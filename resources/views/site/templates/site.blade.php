@@ -34,7 +34,7 @@
                     <span class="navbar-toggler-bar"></span>
                     <span class="navbar-toggler-bar"></span>
                 </button>
-                <a class="navbar-brand" href="home">New Way Heroes</a>
+                <a class="navbar-brand" href="/home">New Way Heroes</a>
             </div>
             
             @if (Route::has('login'))
@@ -44,9 +44,9 @@
                             <li class="nav-item">
                                 <a href="heroes" class="nav-link"><i class="nc-icon nc-circle-10"></i> Heroes</a>
                             </li>
-                            <li class="nav-item">
+                            <!--li class="nav-item">
                                 <a href="config" class="nav-link"><i class="nc-icon nc-settings"></i> Settings</a>
-                            </li>                            
+                            </li-->                            
                             <li class="nav-item">
                                 <a href="logout" class="btn btn-danger btn-round"><i class="nc-icon nc-user-run"></i> Logoff</a>
                             </li>

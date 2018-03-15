@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Heroes extends Model
 {
     protected $table = 'heroes';
+    protected $primaryKey ='idHero';
     protected $fillable = [
         'name'
         ,'idClass'
