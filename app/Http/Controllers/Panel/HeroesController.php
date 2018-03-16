@@ -9,7 +9,7 @@ use App\Models\HeroesPhotos;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Storage;
 
 class HeroesController extends Controller
 {
@@ -81,6 +81,7 @@ class HeroesController extends Controller
                     $heroPhoto = new HeroesPhotos;
                     $heroPhoto->fileName = $file->hashName();
                     $heroPhoto->idHero = $hero->idHero;
+                    $heroPhoto->idUserInsert = Auth::id();
                     $heroPhoto->save();
                 }
             }
@@ -132,9 +133,12 @@ class HeroesController extends Controller
         }
         
         $classes = Classes::orderBy('name')->get();
-        $specialities = Specialities::orderBy('name')->get();
+        $specialities = Specialities::orderBy('name')->get();        
         
-        return view('site.panel.heroes.edit', ['classes' => $classes,'specialities'=>$specialities])->with('hero', $hero);
+        return view('site.panel.heroes.edit', [
+            'classes' => $classes
+                ,'specialities'=>$specialities                
+            ])->with('hero', $hero);
     }
 
     /**
@@ -182,7 +186,16 @@ class HeroesController extends Controller
                     $heroPhoto = new HeroesPhotos;
                     $heroPhoto->fileName = $file->hashName();
                     $heroPhoto->idHero = $hero->idHero;
+                    $heroPhoto->idUserInsert = Auth::id();
                     $heroPhoto->save();
+                }
+            }
+        }
+        if(count($request->heroPhotos) > 0){
+            foreach ($request->heroPhotos as $photoKey => $photo){
+                if($heroPhoto = HeroesPhotos::find($photoKey)){
+                    Storage::delete('public/heroes/'.$hero->idHero.'/photos/'.$heroPhoto->fileName);
+                    $heroPhoto->delete();            
                 }
             }
         }
@@ -199,6 +212,12 @@ class HeroesController extends Controller
     public function destroy($id)
     {
         $hero = Heroes::find($id);
+        $heroPhotos = HeroesPhotos::where('idHero',$hero->idHero)->get();
+        foreach ($heroPhotos as $heroPhoto){
+            Storage::delete('public/heroes/'.$hero->idHero.'/photos/'.$heroPhoto->fileName);
+            $heroPhoto->delete();                        
+        }
+        
         $hero->delete();
         return redirect('heroes')->with('message', 'Hero '.$hero->name.' dismissed!');
     }

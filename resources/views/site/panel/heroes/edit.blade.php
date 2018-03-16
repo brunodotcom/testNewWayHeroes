@@ -51,6 +51,13 @@
             {{ ($errors->has('description')) ? $errors->first('description') : '' }}
             
             <h3>Photos</h3>
+            @foreach($hero->heroPhotos as $photo)                
+            <img src="{{ asset('storage/heroes/'.$hero->idHero.'/photos/'.$photo->fileName)}}"  id="heroPhoto{{ $hero->idHero }}" style="max-width: 100px;"/>&nbsp;
+                <input type="checkbox" name="heroPhotos[{{ $photo->idPhoto }}]" value="delete" /> Delete&nbsp;
+            @endforeach
+            </br></br>
+
+            
             <input class="form-control" type="file" name="photos[]" multiple>
             
 	    
