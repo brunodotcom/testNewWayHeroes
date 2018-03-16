@@ -25,7 +25,7 @@
 
 </head>
 
-<body>
+<body>    
     <nav class="navbar navbar-expand-md fixed-top navbar-transparent" color-on-scroll="500">
         <div class="container">
             <div class="navbar-translate">
@@ -72,21 +72,22 @@
     <footer class="footer">
        <div class="container">
            <div class="row">
-               <nav class="footer-nav">
-                   <ul>
-                       <li><a href="http://www.creative-tim.com">Creative Tim</a></li>
-                       <li><a href="http://blog.creative-tim.com">Blog</a></li>
-                       <li><a href="http://www.creative-tim.com/license">Licenses</a></li>
-                   </ul>
-               </nav>
-               <div class="credits ml-auto">
-                   <span class="copyright">
+                <audio controls style="    margin-top: 27px;    width: 100px;">            
+                     <source src="{{ asset('mp3/bgmusic.mp3') }}" type="audio/mpeg">        
+                </audio>
+               <div class="credits ml-auto">                   
+                   
+                   <span class="copyright">                       
                        © <script>document.write(new Date().getFullYear())</script>, project for New Way developed by Bruno Rocha(@brunodotcom), template made with <i class="fa fa-heart heart"></i> by Creative Tim
                    </span>
+                   
                </div>
+               
            </div>
        </div>
+       
    </footer>
+        
 </body>
 
 <!-- Core JS Files -->
@@ -110,6 +111,11 @@
 
 <!-- Plugins -->
 <script src="{{ asset('js/jquery.mask.js') }}" type="text/javascript"></script>
+
+<!-- Custom JS -->
+<script src="{{ asset('js/custom.js') }}" type="text/javascript"></script>
+
+
 
 @stack('scripts')
 </html>

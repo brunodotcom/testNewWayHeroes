@@ -20,4 +20,12 @@ class Heroes extends Model
         ,'idUserInsert'
         ,'idUserUpdate'
         ,'description'];
+    
+    public function heroPhoto(){
+        return $this->hasOne('App\Models\HeroesPhotos', 'idHero', 'idHero');         
+    }
+    
+    public function heroPhotos(){
+        return $this->hasMany('App\Models\HeroesPhotos', 'idHero', 'idHero');         
+    }
 }

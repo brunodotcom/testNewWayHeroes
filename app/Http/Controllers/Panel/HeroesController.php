@@ -20,7 +20,7 @@ class HeroesController extends Controller
      */
     public function index()
     {
-        $heroes = Heroes::orderBy('name')->simplePaginate(5);
+        $heroes = Heroes::with('heroPhoto')->orderBy('name')->simplePaginate(5);
         return view('site.panel.heroes.index',['allrows' => $heroes]);
     }
 
@@ -76,7 +76,7 @@ class HeroesController extends Controller
                 $files = $request->file('photos');
 
                 foreach ($files as $file) {
-                    $file->store('heroes/' . $hero->idHero . '/photos');
+                    $file->store('public/heroes/' . $hero->idHero . '/photos');
                     
                     $heroPhoto = new HeroesPhotos;
                     $heroPhoto->fileName = $file->hashName();
@@ -200,6 +200,6 @@ class HeroesController extends Controller
     {
         $hero = Heroes::find($id);
         $hero->delete();
-        return redirect('heroes')->with('message', 'Hero '.$hero->name.' deleted!');
+        return redirect('heroes')->with('message', 'Hero '.$hero->name.' dismissed!');
     }
 }

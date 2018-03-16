@@ -22,18 +22,26 @@
     @foreach($allrows as $hero)
         <p>
             <h2 class="text-left">
-                <a href="/heroes/{{ $hero->idHero }}">{{ $hero->name }} </a>
-            </h2>                
+                <a href="/heroes/{{ $hero->idHero }}" id="heroName{{ $hero->idHero }}">{{ $hero->name }} </a>
+                @if($hero->heroPhoto)            
+                    <img src="{{ asset('storage/heroes/'.$hero->idHero.'/photos/'.$hero->heroPhoto->fileName)}}"  id="heroPhoto{{ $hero->idHero }}" style="max-width: 100px;"/>&nbsp;&nbsp; 
+                @endif
+            </h2>           
+            
+        
             <h4>
                 {{ $hero->description }}        
             </h4>
         </p>    
         </br>        
-        <form action="/heroes/{{ $hero->idHero }}" method="POST">            
+        <form action="/heroes/{{ $hero->idHero }}" method="POST" id="heroForm{{ $hero->idHero }}">            
             <input type="hidden" name="_method" value="delete">
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <button onclick="location.href='/heroes/{{ $hero->idHero }}/edit'" type="button" class="btn btn-default">Edit</button>
-            <input class="btn btn-danger" type="submit" name="delete" value="Delete">            
+            <!--input class="btn btn-danger" type="submit" name="delete" value="Delete"-->            
+            <button type="button" name="dismissModal" class="btn btn-danger" data-id="{{ $hero->idHero }}" data-toggle="modal" data-target="#dismissModal">
+                Dismiss
+            </button>
         </form>
         
     @endforeach 
@@ -66,3 +74,21 @@
     @endif
 
 @endsection
+
+@push('scripts')
+    <script type="text/javascript">
+        $(document).on("click", "button[name=dismissModal]", function () {             
+            var heroId = $(this).data('id');            
+            var heroName = $('#heroName'+heroId).text();
+            var heroPhoto = $('#heroPhoto'+heroId).prop('src');
+            
+            prepareDismissModal(heroId,heroName,heroPhoto);            
+       });
+       
+       $(document).on("click", "#dismissButton", function () {             
+            dismissHero($(this).data('id'));
+       });       
+       
+    </script>
+@endpush
+

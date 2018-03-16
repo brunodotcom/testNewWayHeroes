@@ -18,21 +18,14 @@
         <h3>Description</h3>
 	<p>{{ $detailpage->description }} </p>
         <h3>Photos</h3>
-        @foreach($detailpage->photos as $photo)
-            {{$photo->fileName}}            
+        </br>
+        @foreach($detailpage->photos as $photo)            
+        <img style="max-width: 200px;" src="{{ asset('storage/heroes/'.$detailpage->idHero.'/photos/'.$photo->fileName)}}" />&nbsp;&nbsp;
         @endforeach
         
         </br>
+        </br>               
         
-        
-        
-        <form action="/heroes/{{ $detailpage->idHero }}" method="POST">            
-            <input type="hidden" name="_method" value="delete">
-            <input type="hidden" name="_token" value="{{ csrf_token() }}">
-            
-            <button onclick="location.href='/heroes/{{ $detailpage->idHero }}/edit'" type="button" class="btn btn-default">Edit</button>
-            <input class="btn btn-danger" type="submit" name="delete" value="Delete">            
-        </form>
         
         </br>
         <button onclick="location.href='/heroes'" type="button" class="btn btn-default">Return</button>
