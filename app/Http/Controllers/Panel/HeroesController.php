@@ -221,4 +221,16 @@ class HeroesController extends Controller
         $hero->delete();
         return redirect('heroes')->with('message', 'Hero '.$hero->name.' dismissed!');
     }
+    
+    public function api($id){
+
+        if($id){
+            $heroes = Heroes::find($id);
+        }
+        else{
+            $heroes = Heroes::all();  
+        }
+        
+        return response()->json($heroes, 200);
+    }
 }

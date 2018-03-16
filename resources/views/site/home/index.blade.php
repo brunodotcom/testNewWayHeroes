@@ -17,7 +17,7 @@
                             </div>
 
                             <h2 class="presentation-subtitle text-center">
-                               A story from the mightest heroes of Fruit Basket(Bauru) land...
+                               A story about the mightest heroes of Fruit Basket(Bauru) land...
                             </h2>
                         </div>
                 </div>

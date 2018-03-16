@@ -42,20 +42,20 @@
                     <ul class="navbar-nav ml-auto">                    
                         @if (Auth::check())
                             <li class="nav-item">
-                                <a href="heroes" class="nav-link"><i class="nc-icon nc-circle-10"></i> Heroes</a>
+                                <a href="/heroes" class="nav-link"><i class="nc-icon nc-circle-10"></i> Heroes</a>
                             </li>
                             <!--li class="nav-item">
                                 <a href="config" class="nav-link"><i class="nc-icon nc-settings"></i> Settings</a>
                             </li-->                            
                             <li class="nav-item">
-                                <a href="logout" class="btn btn-danger btn-round"><i class="nc-icon nc-user-run"></i> Logoff</a>
+                                <a href="/logout" class="btn btn-danger btn-round"><i class="nc-icon nc-user-run"></i> Logoff</a>
                             </li>
                         @else
                             <li class="nav-item">
-                                <a href="register" class="nav-link"><i class="nc-icon nc-single-02"></i> Register</a>
+                                <a href="/register" class="nav-link"><i class="nc-icon nc-single-02"></i> Register</a>
                             </li>
                             <li class="nav-item">
-                                <a href="login" class="btn btn-danger btn-round"><i class="nc-icon nc-key-25"></i> Login</a>
+                                <a href="/login" class="btn btn-danger btn-round"><i class="nc-icon nc-key-25"></i> Login</a>
                             </li>
                         @endif
                     </ul>

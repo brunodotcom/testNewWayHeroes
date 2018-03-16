@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Http\Request;
+use App\Http\Controllers\Panel\HeroesController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,14 @@ use Illuminate\Http\Request;
 Route::get('/user', function (Request $request) {
     return $request->user();
 })->middleware('auth:api');
+
+
+Route::get('heroes', function ($id = null) {
+    $ctrl = new HeroesController();
+    return $ctrl->api($id);
+});
+
+Route::get('heroes/{id}', function ($id = null) {
+    $ctrl = new HeroesController();
+    return $ctrl->api($id);
+});
